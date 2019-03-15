@@ -86,7 +86,7 @@ Vue.component('v_aside', {
 // 底部组件
 Vue.component('v_footer', {
     template: `
-        <footer class="site-footer navbar-fixed-bottom">
+        <footer class="site-footer">
             <div class="text-center">
                 2019 &copy; 饿了么商家管理平台
                 <a href="#" class="go-top"><i class="fa fa-angle-up"></i></a>
