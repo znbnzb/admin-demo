@@ -22,8 +22,7 @@ var app = new Vue({
         }
     },
     created: function() {
-
-        this.setCurrentMenu('视频管理2', '最近更新');
+        this.setCurrentMenu('视频管理', '新增视频');
     },
     methods: {
 

@@ -1,26 +1,30 @@
-// 全局公用混合对象
-const baseFrameMixin = {
-    el: '#container',
+Vue.component('v_aside', {
+    // props: ['menuobj'], // menus-菜单数据；fm-一级菜单；sm-二级菜单
     data: function() {
         return {
-            asideOff: false, // 控制菜单栏开关
-
-            // 菜单数据对象
+            ItemObj: [{
+                // FirstList: '',
+                // IndexUrl: '',
+                // SecondList: [],
+                // indexList: '',
+                // induxUrl: ''
+                // list: ''
+            }],
+            isActive: false,
+            //菜单数据对象
             hasMenu: false,
             menuobj: {
                 list: []
             },
         }
     },
-
-    created: function() {
+    created() {
+        // this.getMenu();
         this.queryMenu();
     },
-
     methods: {
+        //请求菜单
         queryMenu: function() {
-            // 合并请求
-
             var _this = this;
             const queryMenus = Bmob.Query('MenuList');
             queryMenus.find().then(res => {
@@ -29,6 +33,17 @@ const baseFrameMixin = {
                 _this.hasMenu = true;
                 console.log(_this.menuobj);
             })
+        },
+
+        getMenu() {
+            const _this = this
+            const getMenu = Bmob.Query('MenuList')
+            getMenu.find().then(res => {
+                _this.ItemObj = res;
+            })
+        },
+        isActive2() {
+            this.isActive = true
         },
         setCurrentMenu: function(_1st_menu, _2nd_menu, _3rd_menu) {
             if (_1st_menu) {
@@ -59,38 +74,25 @@ const baseFrameMixin = {
                 });
             }, 0);
         },
-    }
-};
-// 侧边栏菜单组件
-Vue.component('v_aside', {
-    props: ['menuobj'], // menus-菜单数据；fm-一级菜单；sm-二级菜单
+    },
+
     template: `
-        <aside>
+    <aside>
+            <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
-                <li v-for="item in menuobj.list" :class="{'active':item.FirstList==menuobj.fm, 'sub-menu':item.SecondList.length>0}">
-                    <a :class="{'active':item.FirstList==menuobj.fm}" :href="item.SecondList.length>0 ? 'javascript\\:;' : item.url">
-                        <i class="fa " :class="item.icon||'fa-book'"></i> 
-                        <span>{{item.FirstList}}</span>
-                    </a>
-                    <ul class="sub" :style="{'display:block;':item.FirstList==menuobj.fm}">
-                        <li v-for="sub in item.SecondList" :class="{'active':item.FirstList==menuobj.fm&&sub.MenuName==menuobj.sm, 'sub-menu':sub.SecondList}">
+                 <li v-for="item in menuobj.list" :class="{'active':item.FirstList==menuobj.fm, 'sub-menu':item.FirstList.length>0}">
+                    <a :class="{'active':item.FirstList==menuobj.fm}" :href="item.FirstList.length>0 ? 'javascript\\:;' : item.url"><i class="fa" :class="item.icon||'fa-folder'"></i> <span>{{item.FirstList}}</span></a>
+                    <ul class="sub" :style="{'display:block;':item.name==menuobj.fm}">
+                        <li v-for="sub in item.SecondList" :class="{'active':item.name==menuobj.fm&&sub.name==menuobj.sm&&!sub.SecondList, 'sub-menu':sub.SecondList}">
                             <a :href="sub.MenuUrl" :class="{'active':sub.MenuName==menuobj.sm}">{{sub.MenuName}}</a>
                         </li>
                     </ul>
                 </li>
-            </ul>
-        </aside>
-    `,
-});
+                <!--multi level menu end-->
 
-// 底部组件
-Vue.component('v_footer', {
-    template: `
-        <footer class="site-footer navbar-fixed-bottom">
-            <div class="text-center">
-                2019 &copy; 饿了么商家管理平台
-                <a href="#" class="go-top"><i class="fa fa-angle-up"></i></a>
-            </div>
-        </footer>
-    `
-});
+            </ul>
+        <!-- sidebar menu end-->
+    </aside>
+    </aside>
+        `
+})
