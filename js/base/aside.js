@@ -31,7 +31,6 @@ Vue.component('v_aside', {
                 var menudata = res || [];
                 _this.$set(_this.menuobj, "list", menudata);
                 _this.hasMenu = true;
-                console.log(_this.menuobj);
             })
         },
 
