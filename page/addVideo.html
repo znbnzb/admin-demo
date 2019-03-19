@@ -37,6 +37,7 @@
     <!-- <script src="./js/base/aside.js"></script> -->
     <script src="../js/base/base-utils.js"></script>
     <script src="../js/base/base-fram-mixxin.js"></script>
+    <script src="../js/base/xgplayer.js"></script>
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
@@ -76,8 +77,8 @@
                 <div class="panel-body">
                     <!--内容开始-->
                     <div class="product-list">
-                        <div v-for="(item,index) in navItems" :key="index" class="col-md-3">
-                            <a href="https://www.baidu.com/">
+                        <div v-for="(item,index) in navItems" :key="index" class="col-md-3 mse">
+
                                 <section class="panel">
                                     <div class="pro-img-box">
                                         <img :src="item.ImageUrl" alt=""/>
@@ -89,13 +90,13 @@
                                     <div class="panel-body text-center">
                                         <h4>
                                             <a href="#" class="pro-title">
-                                                {{item.TitleList}}
+                                                {{item.TitleUrl}}
                                             </a>
                                         </h4>
                                         <!--<p class="price">300元</p>-->
                                     </div>
                                 </section>
-                            </a>
+
                         </div>
 
                     </div>
