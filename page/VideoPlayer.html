@@ -19,6 +19,9 @@
     <link href="../assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css"
           media="screen"/>
     <link rel="stylesheet" href="../css/owl.carousel.css" type="text/css">
+    <!--图片列表展示插件-->
+    <link href="../assets/fancybox/source/jquery.fancybox.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../css/gallery.css" />
     <!-- 提示插件样式 -->
     <link href="../js/base/toastr-master/toastr.css">
 
@@ -56,6 +59,7 @@
     <section id="main-content">
         <section class="wrapper site-min-height">
             <!-- page start-->
+
             <div class="row">
                 <div class="col-lg-12">
                     <!--breadcrumbs start -->
@@ -63,33 +67,51 @@
                         <li>
                             <a href="#">视频管理</a>
                         </li>
-                        <li class="active">视频播放</li>
+                        <li class="active">本地视频</li>
                     </ul>
                     <!--breadcrumbs end -->
                 </div>
             </div>
-            <!--内容开始-->
-            <div class=" row  product-list">
-                <div v-for="(item,index) in navItems" :key="index" class="col-md-3 " v-cloak>
-                    <a data-toggle="modal" data-target="#playerModal" @click="playCourseware(item)">
-                        <section class="panel" v-cloak>
-                            <div class="pro-img-box">
-                                <img :src="item.ImageUrl" alt=""/>
-                                <a href="#" class="adtocart">
-                                    <i class="fa fa-play-circle"></i>
-                                </a>
-                            </div>
-                            <div class="panel-body text-center">
-                                <h4>
-                                    <a href="#" class="pro-title">
-                                        {{item.TitleList}}
-                                    </a>
-                                </h4>
-                            </div>
-                        </section>
-                    </a>
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            视频播放列表
+                            <span class="pull-right">
+                                <a href="#" class="btn btn-success btn-xs">新增视频</a>
+                            </span>
+                        </header>
+                        <div class="panel-body">
+                            <ul class="grid cs-style-3">
+                                <li v-for="(item,index) in navItems" :key="index" style="width: 400px;" v-cloak>
+                                    <figure>
+                                        <img :src="'./images/local_img/'+item.ImageUrl">
+                                        <figcaption>
+                                            <h3 style="line-height:30px;">{{item.TitleList}}</h3>
+                                            <a data-toggle="modal" data-target="#playerModal" @click="playCourseware(item)" type="button" class="btn btn-danger">点击查看</a>
+                                        </figcaption>
+                                    </figure>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
                 </div>
             </div>
+
+            <!--<div class=" row  product-list">-->
+                <!--<div v-for="(item,index) in navItems" :key="index" class="col-md-3 " v-cloak>-->
+
+                        <!--<section class="panel" data-toggle="modal" data-target="#playerModal" @click="playCourseware(item)" v-cloak>-->
+                            <!--<div class="pro-img-box">-->
+                                <!--<img :src="item.ImageUrl" alt=""/>-->
+                            <!--</div>-->
+                            <!--<div class="panel-body text-center">-->
+                                <!--<h4>{{item.TitleList}}</h4>-->
+                            <!--</div>-->
+                        <!--</section>-->
+
+                <!--</div>-->
+            <!--</div>-->
 
             <div v-if="navItems.length > 0" class="text-right">
                 <div class="custom-page"></div>
@@ -130,6 +152,8 @@
 <script class="include" type="text/javascript" src="../js/jquery.dcjqaccordion.2.7.js"></script>
 <!-- 返回顶部 -->
 <script src="../js/jquery.scrollTo.min.js"></script>
+<!-- 图片插件 -->
+<script src="../assets/fancybox/source/jquery.fancybox.js"></script>
 <!-- 提示插件 -->
 <script src="../js/base/toastr-master/toastr.js"></script>
 <!-- 分页插件 -->
@@ -140,11 +164,13 @@
 <!-- Bmob后端云 -->
 <script src="../assets/Bomb/Bmob-1.6.7.min.js"></script>
 <script src="../js/base/Bmob.js"></script>
-
+<script src="../js/modernizr.custom.js"></script>
+<script src="../js/toucheffects.js"></script>
 <!-- 兼容CSS3特性 -->
 <script src="../js/respond.min.js"></script>
 <!--common script for all pages 左侧菜单-->
 <script src="../js/common-scripts.js"></script>
+
 
 <!--视频播放插件-->
 <script type="text/javascript" src="../js/ckplayer/ckplayer/ckplayer.js" charset="utf-8"></script>

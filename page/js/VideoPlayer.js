@@ -3,7 +3,7 @@ app = new Vue({
     mixins: [baseFrameMixin],
     data: function () {
         return {
-            navItems: "",
+            navItems: {},
             queryObj: {
                 expression: '',
                 orderBy: '',
@@ -25,7 +25,7 @@ app = new Vue({
                 //autoplay: true, //是否自动播放
                 //duration: 500, //设置视频总时间
                 cktrack: null, //字幕文件
-                poster: './img/product-list/pro1.jpg', //封面图片
+                poster: './images/local_img/pro1.jpg', //封面图片
                 config: '', //指定配置函数
                 debug: false, //是否开启调试模式
                 //flashplayer: true, //强制使用flashplayer
@@ -62,9 +62,8 @@ app = new Vue({
         // this.onchange();
     },
     created: function () {
-        this.setCurrentMenu('视频管理', '视频播放');
+        this.setCurrentMenu('视频管理', '本地视频');
         this.getVideo();
-
     },
     methods: {
         // 获取列表
@@ -113,19 +112,24 @@ app = new Vue({
                 return;
             }
 
-            var path =_this.curware.PlayerPath;
+            var path ='./video/'+_this.curware.PlayerPath;
+            var img ='./images/local_img/'+_this.curware.ImageUrl;
 
             //_this.videoConfig.video = path;
             //_this.initPlayer();
+            console.log(path);
+            console.log(img);
 
             var newVideoObject = {
                 container: '#video', //容器的ID
                 variable: 'player',
+                volume: 0.02, //默认音量，范围0-1
+                poster:img,//封面图
                 autoplay: false, //是否自动播放
                 video: path
             }
             _this.player.newVideo(newVideoObject);
-        }
+        },
     }
 
 });
