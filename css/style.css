@@ -179,6 +179,8 @@ a, a:hover, a:focus {
     background: #2a3542;
     overflow-y: scroll;
 }
+/*vue闪现*/
+[v-cloak] {display: none;}
 /*分页样式*/
 .custom-page{display:inline-block;}
 .custom-page a,.custom-page span,.custom-page .current,.custom-page .prevPage,.custom-page .nextPage{display:inline-block;padding:5px 10px;border:1px solid #ddd;background-color:#fff;font-size:12px;line-height:1.5;text-decoration:none;text-align:center;color:#333;margin-left:4px;}
@@ -189,7 +191,9 @@ a, a:hover, a:focus {
 .custom-page .current{background-color:#bec3c7;border-color:#bec3c7;color:#fff;cursor:default;}
 .custom-page .disabled{cursor:not-allowed;color:#999;border-color:#ddd;}
 
-
+/*播放加载*/
+.video-loading { position: absolute;width: 100%;height: 100%;z-index: 101;top: 0;left: 0;background: #000;}
+.video-loading i { font-size: 40px;position: absolute;top: calc(50% - 20px);left: calc(50% - 20px);transform: translate(-50%,-50%);}
 #sidebar ul li {
     position: relative;
 }

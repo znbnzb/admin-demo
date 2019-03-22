@@ -14,7 +14,7 @@ const baseFrameMixin = {
         },
 
         created: function() {
-            this.queryMenu()
+            this.queryMenu();
         },
 
         methods: {
